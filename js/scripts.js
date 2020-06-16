@@ -83,6 +83,16 @@ function showContact(contactId, addressBook) {
   $(".personal-address").html(contact.addresses.personal);
   $(".work-address").html(contact.addresses.work);
   $(".vacation-address").html(contact.addresses.vacation);
+  if(contact.addresses.personal === "") {
+    $(".personal-address").parent().hide();
+  }
+  if(contact.addresses.work === "") {
+    $(".work-address").parent().hide();
+  }
+  if(contact.addresses.vacation === "") {
+    $(".vacation-address").parent().hide();
+  }
+  
   console.log(contact.addresses.vacation);
   let buttons = $("#buttons");
   buttons.empty();
