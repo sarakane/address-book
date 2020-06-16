@@ -43,7 +43,7 @@ function Contact(firstName, lastName, phoneNumber, emailAddress) {
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
   this.emailAddress = emailAddress;
-  this.addresses = [];
+  this.addresses = {};
 }
 
 Contact.prototype.fullName = function() {
@@ -51,7 +51,7 @@ Contact.prototype.fullName = function() {
 }
 
 Contact.prototype.addAddress = function(address) {
-  this.addresses.push(address);
+  this.addresses = address;
 }
 
 //Business Logic for Addresses 
@@ -80,9 +80,10 @@ function showContact(contactId, addressBook) {
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
   $(".email-address").html(contact.emailAddress);
-  $(".personal-address").html(contact.addresses[0].personal);
-  $(".work-address").html(contact.addresses[0].work);
-  $(".vacation-address").html(contact.address[0].vacation);
+  $(".personal-address").html(contact.addresses.personal);
+  $(".work-address").html(contact.addresses.work);
+  $(".vacation-address").html(contact.addresses.vacation);
+  console.log(contact.addresses.vacation);
   let buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
