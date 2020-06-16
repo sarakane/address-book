@@ -50,7 +50,7 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
 
-Contact.prototype.addAddress(address) {
+Contact.prototype.addAddress = function(address) {
   this.addresses.push(address);
 }
 
@@ -80,7 +80,9 @@ function showContact(contactId, addressBook) {
   $(".last-name").html(contact.lastName);
   $(".phone-number").html(contact.phoneNumber);
   $(".email-address").html(contact.emailAddress);
-  $(".physical-address").html(contact.addresses)
+  $(".personal-address").html(contact.addresses[0].personal);
+  $(".work-address").html(contact.addresses[0].work);
+  $(".vacation-address").html(contact.address[0].vacation);
   let buttons = $("#buttons");
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
@@ -107,15 +109,21 @@ $(document).ready(function() {
     const inputtedLastName = $("input#new-last-name").val();
     const inputtedPhoneNumber = $("input#new-phone-number").val();
     const inputtedEmailAddress = $("input#new-email-address").val();
-    const inputtedaddresses = $("input#new-physical-address").val();
+    const inputtedPersonalAddress = $("input#new-personal-address").val();
+    const inputtedWorkAddress = $("input#new-work-address").val();
+    const inputtedVacationAddress = $("input#new-vacation-address").val();
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
     $("input#new-phone-number").val("");
     $("input#new-email-address").val("");
-    $("input#new-physical-address").val("");
+    $("input#new-personal-address").val("");
+    $("input#new-work-address").val("");
+    $("input#new-vacation-address").val("");
     
-    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress, inputtedaddresses);
+    let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress);
+    let newAddresses = new Address(inputtedPersonalAddress, inputtedWorkAddress, inputtedVacationAddress);
+    newContact.addAddress(newAddresses);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
   });
